@@ -5,12 +5,12 @@
 @tailwind utilities;
 
 :root {
-  --cream: #f5f0e8;
-  --cream-dim: #e8e0d0;
-  --charcoal: #0e0c0a;
+  --cream: #FFFFFF;
+  --cream-dim: #FFFFFF;
+  --charcoal: #000000;
   --charcoal-2: #181410;
   --charcoal-3: #221e18;
-  --gold: #c9a84c;
+  --gold: #fccc00;
   --gold-light: #e2c47a;
   --gold-dim: rgba(201,168,76,0.15);
   --muted: #7a7060;

@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import Image from "next/image";
 
 export default function Navbar({ onCallClick }: { onCallClick: () => void }) {
   const [scrolled, setScrolled] = useState(false);
@@ -11,9 +12,13 @@ export default function Navbar({ onCallClick }: { onCallClick: () => void }) {
 
   return (
     <nav className="nav" style={{ borderBottomColor: scrolled ? "var(--border)" : "transparent" }}>
-      <span className="display" style={{ fontSize: "1.15rem", color: "var(--cream)" }}>
-        <em style={{ color: "var(--gold)" }}>AI</em> Receptionist
-      </span>
+      <Image
+        src="/logo.jpeg"
+        alt="Torq Agents"
+        width={48}
+        height={48}
+        style={{ objectFit: "contain" }}
+      />
       <div style={{ display: "flex", gap: "1rem", alignItems: "center" }}>
         <a href="#pricing" className="mono" style={{ color: "var(--muted)", textDecoration: "none" }}>
           Pricing
