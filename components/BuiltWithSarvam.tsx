@@ -1,5 +1,5 @@
 const stack = [
-  { label: "Speech-to-Text", value: "Sarvam Saarika", gold: true },
+  { label: "Speech-to-Text", value: "Sarvam Saaras", gold: true },
   { label: "Text-to-Speech", value: "Sarvam Bulbul",  gold: true },
   { label: "Agent Framework", value: "LiveKit Agents", gold: false },
   { label: "Frontend",        value: "Next.js",        gold: false },
