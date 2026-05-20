@@ -23,7 +23,7 @@ export async function GET() {
 
   token.addGrant({
     roomJoin: true,
-    room: "hotel-lobby",   // must match the room your agent is listening on
+    room: guestName,   // must match the room your agent is listening on
     canPublish: true,
     canSubscribe: true,
   });
