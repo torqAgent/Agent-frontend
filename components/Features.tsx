@@ -19,8 +19,12 @@ export default function Features() {
         </div>
         <div className="two-col-content">
           <h2 className="section-title">Every feature your<br /><em>front desk needs</em></h2>
+          <p className="section-body" style={{ marginBottom: "0.75rem" }}>
+            Built exclusively for hotels, serviced apartments, and travel agencies.
+            Every feature designed around how a receptionist actually works —
+            nothing generic, nothing irrelevant.
+          </p>
           <p className="section-body" style={{ marginBottom: "3rem" }}>
-            Built for hotels, travel agencies, and high-volume hospitality businesses.
             No technical setup required on your end.
           </p>
           <div className="feature-grid">
@@ -28,7 +32,10 @@ export default function Features() {
               <div key={i} className="feature-cell">
                 <div style={{ display: "flex", alignItems: "flex-start", gap: "0.75rem" }}>
                   <span style={{ color: "var(--gold)", marginTop: "2px", flexShrink: 0, fontSize: "0.7rem" }}>◆</span>
-                  <span style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 300, fontSize: "0.9rem", color: "var(--cream-dim)", lineHeight: 1.6 }}>
+                  <span style={{
+                    fontFamily: "'DM Sans', sans-serif", fontWeight: 300,
+                    fontSize: "0.9rem", color: "var(--cream-dim)", lineHeight: 1.6,
+                  }}>
                     {f}
                   </span>
                 </div>

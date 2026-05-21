@@ -14,14 +14,45 @@ export default function UseCases() {
         </div>
         <div className="two-col-content">
           <h2 className="section-title">Built for<br /><em>hospitality</em></h2>
-          <div style={{ marginTop: "2.5rem" }}>
+
+          {/* Cases as horizontal cards */}
+          <div style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(3, 1fr)",
+            gap: "1px",
+            background: "var(--border)",
+            border: "1px solid var(--border)",
+            marginTop: "2.5rem",
+          }}>
             {cases.map((c) => (
-              <div key={c.label} className="step-row">
-                <span className="mono" style={{ color: "var(--muted)", flexShrink: 0, width: "2rem", paddingTop: "3px" }}>{c.label}</span>
-                <div>
-                  <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 400, fontSize: "1.5rem", color: "var(--cream)", marginBottom: "0.4rem" }}>{c.title}</h3>
-                  <p className="body-text" style={{ fontSize: "0.9rem", maxWidth: "42ch" }}>{c.description}</p>
-                </div>
+              <div
+                key={c.label}
+                className="feature-cell"
+                style={{ padding: "1.75rem 1.5rem" }}
+              >
+                <span
+                  className="mono"
+                  style={{
+                    color: "var(--muted)",
+                    fontSize: "9px",
+                    display: "block",
+                    marginBottom: "1rem",
+                  }}
+                >
+                  {c.label}
+                </span>
+                <h3 style={{
+                  fontFamily: "'Cormorant Garamond', serif",
+                  fontWeight: 400,
+                  fontSize: "1.5rem",
+                  color: "var(--cream)",
+                  marginBottom: "0.5rem",
+                }}>
+                  {c.title}
+                </h3>
+                <p className="body-text" style={{ fontSize: "0.9rem" }}>
+                  {c.description}
+                </p>
               </div>
             ))}
           </div>

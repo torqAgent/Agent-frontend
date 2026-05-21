@@ -4,7 +4,7 @@ const plans = [
     name: "Starter",
     price: "₹15,000",
     setup: "₹30,000",
-    minutes: "300",
+    minutes: "750",
     overage: "₹6",
     featured: false,
     features: [
@@ -21,7 +21,7 @@ const plans = [
     name: "Growth",
     price: "₹25,000",
     setup: "₹55,000",
-    minutes: "600",
+    minutes: "1,500",
     overage: "₹5",
     featured: true,
     features: [
@@ -38,7 +38,7 @@ const plans = [
     name: "Pro",
     price: "₹35,000",
     setup: "₹80,000",
-    minutes: "1,200",
+    minutes: "3,000",
     overage: "₹4",
     featured: false,
     features: [
@@ -64,20 +64,49 @@ export default function Pricing() {
         </p>
       </div>
 
+      {/* Setup fee callout */}
+      <div style={{
+        background: "var(--charcoal-2)",
+        border: "1px solid var(--border)",
+        borderRadius: "12px",
+        padding: "1.25rem 1.75rem",
+        display: "flex",
+        alignItems: "flex-start",
+        gap: "0.75rem",
+        maxWidth: "600px",
+        margin: "2.5rem auto 0",
+      }}>
+        <span style={{ color: "var(--gold)", fontSize: "0.7rem", marginTop: "3px", flexShrink: 0 }}>◆</span>
+        <p style={{
+          fontFamily: "'DM Sans', sans-serif", fontWeight: 300,
+          fontSize: "0.875rem", color: "var(--muted-light)", lineHeight: 1.65,
+        }}>
+          <span style={{ color: "var(--cream)" }}>Setup fee covers full onboarding by our engineering team</span> — phone
+          routing, PMS integration, FAQ training, test calls, and go-live support.
+          You pay once, we handle everything.
+        </p>
+      </div>
+
       <div className="pricing-grid">
         {plans.map((p) => (
           <div key={p.tier} className={`pricing-card${p.featured ? " featured" : ""}`}>
-            {/* Tier */}
             <div style={{ marginBottom: "0.4rem" }}>
-              <span className="mono" style={{ color: p.featured ? "var(--gold)" : "var(--muted)", fontSize: "10px" }}>{p.tier}</span>
+              <span className="mono" style={{ color: p.featured ? "var(--gold)" : "var(--muted)", fontSize: "10px" }}>
+                {p.tier}
+              </span>
             </div>
-            <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.6rem", fontWeight: 400, color: "var(--cream)", marginBottom: "1.75rem" }}>
+            <div style={{
+              fontFamily: "'Cormorant Garamond', serif", fontSize: "1.6rem",
+              fontWeight: 400, color: "var(--cream)", marginBottom: "1.75rem",
+            }}>
               {p.name}
             </div>
 
-            {/* Price */}
             <div style={{ marginBottom: "0.4rem" }}>
-              <span style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "2.8rem", fontWeight: 300, color: p.featured ? "var(--gold)" : "var(--cream)" }}>
+              <span style={{
+                fontFamily: "'Cormorant Garamond', serif", fontSize: "2.8rem",
+                fontWeight: 300, color: p.featured ? "var(--gold)" : "var(--cream)",
+              }}>
                 {p.price}
               </span>
               <span className="mono" style={{ color: "var(--muted)", fontSize: "10px", marginLeft: "0.4rem" }}>/mo</span>
@@ -91,19 +120,25 @@ export default function Pricing() {
 
             <hr style={{ border: "none", borderTop: "1px solid var(--border)", marginBottom: "1.75rem" }} />
 
-            {/* Features */}
-            <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "0.85rem", marginBottom: "2.5rem", flex: 1 }}>
+            <ul style={{
+              listStyle: "none", display: "flex", flexDirection: "column",
+              gap: "0.85rem", marginBottom: "2.5rem", flex: 1,
+            }}>
               {p.features.map((f, i) => (
                 <li key={i} style={{ display: "flex", alignItems: "flex-start", gap: "0.65rem" }}>
                   <span style={{ color: "var(--gold)", fontSize: "0.65rem", flexShrink: 0, marginTop: "4px" }}>◆</span>
-                  <span style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 300, fontSize: "0.875rem", color: "var(--cream-dim)", lineHeight: 1.5 }}>{f}</span>
+                  <span style={{
+                    fontFamily: "'DM Sans', sans-serif", fontWeight: 300,
+                    fontSize: "0.875rem", color: "var(--cream-dim)", lineHeight: 1.5,
+                  }}>
+                    {f}
+                  </span>
                 </li>
               ))}
             </ul>
 
-            
             <a
-              href="mailto:hello@example.com"
+              href="mailto:hello@torqdesigns.com"
               className={p.featured ? "btn-primary" : "btn-outline"}
               style={{ justifyContent: "center", width: "100%" }}
             >

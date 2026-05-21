@@ -5,9 +5,11 @@ import Hero from "@/components/Hero";
 import Features from "@/components/Features";
 import HowItWorks from "@/components/HowItWorks";
 import CallWidget from "@/components/CallWidget";
-import BuiltWithSarvam from "@/components/BuiltWithSarvam";
+import VisibilityControl from "@/components/VisibilityControl";
+import OnboardingTimeline from "@/components/OnboardingTimeline";
 import UseCases from "@/components/UseCases";
 import Pricing from "@/components/Pricing";
+import FAQ from "@/components/FAQ";
 
 export default function Home() {
   const callRef = useRef<HTMLDivElement>(null);
@@ -40,9 +42,11 @@ export default function Home() {
         </div>
       </section>
 
-      <BuiltWithSarvam />
+      <VisibilityControl />
+      <OnboardingTimeline />
       <UseCases />
       <Pricing />
+      <FAQ />
 
       {/* CTA Banner */}
       <section style={{ padding: "0 2rem 7rem", maxWidth: "1100px", margin: "0 auto" }}>
@@ -60,21 +64,44 @@ export default function Home() {
           <p className="section-body" style={{ margin: "0 auto 2.5rem", textAlign: "center" }}>
             Schedule a demo and see the agent handle real hotel queries live.
           </p>
-          <a href="mailto:hello@example.com" className="btn-primary">
+          <a href="mailto:hello@torqdesigns.com" className="btn-primary">
             Schedule a Demo
           </a>
         </div>
       </section>
 
       {/* Footer */}
-      <div className="footer">
-        <span className="display" style={{ fontSize: "1.05rem", color: "var(--muted)", fontStyle: "italic" }}>
-          AI Hotel Receptionist
-        </span>
-        <span className="mono" style={{ color: "var(--muted)", fontSize: "9px" }}>
-          Built with Sarvam AI · LiveKit · Next.js
-        </span>
-      </div>
+      <footer style={{
+        borderTop: "1px solid var(--border)",
+        padding: "3rem 2.5rem",
+        maxWidth: "1100px",
+        margin: "0 auto",
+        display: "flex",
+        flexDirection: "column",
+        gap: "1.5rem",
+      }}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "1rem" }}>
+          <span className="display" style={{ fontSize: "1.05rem", color: "var(--muted)", fontStyle: "italic" }}>
+            AI Hotel Receptionist
+          </span>
+          <div style={{ display: "flex", gap: "2rem", alignItems: "center", flexWrap: "wrap" }}>
+            <a href="#pricing" className="mono" style={{ color: "var(--muted)", textDecoration: "none", fontSize: "10px" }}>
+              Pricing
+            </a>
+            <a href="mailto:hello@torqdesigns.com" className="mono" style={{ color: "var(--muted)", textDecoration: "none", fontSize: "10px" }}>
+              Contact
+            </a>
+          </div>
+        </div>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "0.5rem" }}>
+          <span className="mono" style={{ color: "var(--muted)", fontSize: "9px" }}>
+            Built with Sarvam AI · LiveKit · Next.js
+          </span>
+          <span className="mono" style={{ color: "var(--muted)", fontSize: "9px" }}>
+            © {new Date().getFullYear()} Torq Designs
+          </span>
+        </div>
+      </footer>
     </main>
   );
 }
