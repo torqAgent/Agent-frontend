@@ -57,26 +57,17 @@ export default function Pricing() {
     <section id="pricing" className="section-wrap">
       <hr className="hairline" style={{ marginBottom: "5rem" }} />
       <div style={{ textAlign: "center", marginBottom: "1rem" }}>
-        <span className="section-label" style={{ display: "inline-block" }}>Pricing</span>
-        <h2 className="section-title" style={{ maxWidth: "none" }}>Simple, transparent plans</h2>
-        <p className="section-body" style={{ margin: "0 auto", textAlign: "center", maxWidth: "46ch" }}>
+        <span className="section-label reveal" style={{ display: "inline-block" }}>Pricing</span>
+        <h2 className="section-title reveal reveal-delay-1" style={{ maxWidth: "none" }}>
+          Simple, transparent plans
+        </h2>
+        <p className="section-body reveal reveal-delay-2" style={{ margin: "0 auto", textAlign: "center", maxWidth: "46ch" }}>
           No hidden fees. Cancel anytime. Get in touch to discuss a custom setup for your property.
         </p>
       </div>
 
-      {/* Setup fee callout */}
-      <div style={{
-        background: "var(--charcoal-2)",
-        border: "1px solid var(--border)",
-        borderRadius: "12px",
-        padding: "1.25rem 1.75rem",
-        display: "flex",
-        alignItems: "flex-start",
-        gap: "0.75rem",
-        maxWidth: "600px",
-        margin: "2.5rem auto 0",
-      }}>
-        <span style={{ color: "var(--gold)", fontSize: "0.7rem", marginTop: "3px", flexShrink: 0 }}>◆</span>
+      <div className="setup-callout reveal reveal-delay-2">
+        <span style={{ color: "var(--gold)", fontSize: "0.65rem", marginTop: "3px", flexShrink: 0 }}>◆</span>
         <p style={{
           fontFamily: "'DM Sans', sans-serif", fontWeight: 300,
           fontSize: "0.875rem", color: "var(--muted-light)", lineHeight: 1.65,
@@ -87,11 +78,15 @@ export default function Pricing() {
         </p>
       </div>
 
-      <div className="pricing-grid">
+      <div className="pricing-grid reveal reveal-delay-3">
         {plans.map((p) => (
           <div key={p.tier} className={`pricing-card${p.featured ? " featured" : ""}`}>
+            {p.featured && <div className="featured-badge">Most Popular</div>}
+
             <div style={{ marginBottom: "0.4rem" }}>
-              <span className="mono" style={{ color: p.featured ? "var(--gold)" : "var(--muted)", fontSize: "10px" }}>
+              <span className="mono" style={{
+                color: p.featured ? "var(--gold)" : "var(--muted)", fontSize: "10px",
+              }}>
                 {p.tier}
               </span>
             </div>
@@ -126,7 +121,7 @@ export default function Pricing() {
             }}>
               {p.features.map((f, i) => (
                 <li key={i} style={{ display: "flex", alignItems: "flex-start", gap: "0.65rem" }}>
-                  <span style={{ color: "var(--gold)", fontSize: "0.65rem", flexShrink: 0, marginTop: "4px" }}>◆</span>
+                  <span style={{ color: "var(--gold)", fontSize: "0.6rem", flexShrink: 0, marginTop: "4px" }}>◆</span>
                   <span style={{
                     fontFamily: "'DM Sans', sans-serif", fontWeight: 300,
                     fontSize: "0.875rem", color: "var(--cream-dim)", lineHeight: 1.5,
@@ -148,7 +143,9 @@ export default function Pricing() {
         ))}
       </div>
 
-      <p className="mono" style={{ color: "var(--muted)", textAlign: "center", marginTop: "2.5rem", fontSize: "10px" }}>
+      <p className="mono" style={{
+        color: "var(--muted)", textAlign: "center", marginTop: "2.5rem", fontSize: "10px",
+      }}>
         Get in touch to schedule a demo or discuss a custom setup
       </p>
     </section>

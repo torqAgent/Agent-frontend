@@ -1,165 +1,124 @@
 "use client";
 import { useState, useEffect } from "react";
-import Image from "next/image";
 
-export default function Navbar({ onCallClick }: { onCallClick: () => void }) {
+interface NavbarProps { onCallClick: () => void; }
+
+const links = [
+  { label: "Features",   href: "#features"    },
+  { label: "How It Works", href: "#how-it-works" },
+  { label: "Demo",       href: "#demo"        },
+  { label: "Pricing",    href: "#pricing"     },
+];
+
+export default function Navbar({ onCallClick }: NavbarProps) {
+  const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [drawerOpen, setDrawerOpen] = useState(false);
 
   useEffect(() => {
-    const fn = () => setScrolled(window.scrollY > 40);
-    window.addEventListener("scroll", fn, { passive: true });
-    return () => window.removeEventListener("scroll", fn);
+    const handler = () => setScrolled(window.scrollY > 24);
+    window.addEventListener("scroll", handler, { passive: true });
+    return () => window.removeEventListener("scroll", handler);
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = drawerOpen ? "hidden" : "";
+    document.body.style.overflow = open ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
-  }, [drawerOpen]);
+  }, [open]);
 
-  const close = () => setDrawerOpen(false);
-
-  const navLinks = [
-    { label: "Features",     href: "#features"     },
-    { label: "How It Works", href: "#how-it-works" },
-    { label: "Demo",         href: "#demo"         },
-    { label: "Pricing",      href: "#pricing"      },
-  ];
+  const close = () => setOpen(false);
 
   return (
     <>
-      <nav
-        className="nav"
-        style={{ borderBottomColor: scrolled ? "var(--border)" : "transparent" }}
-      >
-        {/* Logo */}
+      <nav className={`nav${scrolled ? " scrolled" : ""}`} role="navigation" aria-label="Main navigation">
         <a
           href="/"
-          aria-label="Torq Agents home"
           style={{
-            display: "flex", alignItems: "center",
-            gap: "0.6rem", textDecoration: "none", flexShrink: 0,
+            fontFamily: "'Cormorant Garamond', serif",
+            fontSize: "1.15rem",
+            fontStyle: "italic",
+            fontWeight: 300,
+            color: "var(--cream)",
+            letterSpacing: "0.01em",
+            flexShrink: 0,
           }}
         >
-          <Image
-            src="/logo.jpeg"
-            alt="Torq Agents"
-            width={32}
-            height={32}
-            style={{ objectFit: "contain", borderRadius: "6px" }}
-            priority
-          />
-          <span style={{
-            fontFamily: "'Cormorant Garamond', serif",
-            fontStyle: "italic", fontWeight: 300,
-            fontSize: "1rem", color: "var(--cream)", letterSpacing: "0.01em",
-          }}>
-            Torq<span style={{ color: "var(--gold)" }}>.</span>
-          </span>
+          Torq<span style={{ color: "var(--gold)" }}>.</span>
         </a>
 
-        {/* Desktop nav links */}
         <div className="nav-links" role="list">
-          {navLinks.map(({ label, href }) => (
-            <a key={href} href={href} className="nav-link" role="listitem">{label}</a>
+          {links.map(({ label, href }) => (
+            <a key={label} href={href} className="nav-link" role="listitem">{label}</a>
           ))}
         </div>
 
-        {/* Desktop CTAs + mobile hamburger */}
-        <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-          {/* Desktop only buttons */}
+        <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
           <button
             onClick={onCallClick}
-            className="btn-ghost"
-            style={{ padding: "0.55rem 1.1rem", fontSize: "9.5px" }}
-            aria-label="Try demo"
-          >
-            Try Demo
-          </button>
-          <a
-            href="mailto:hello@torqdesigns.com"
             className="btn-primary"
-            style={{ padding: "0.55rem 1.25rem", fontSize: "9.5px" }}
+            style={{ fontSize: "9px", padding: "0.6rem 1.1rem", display: "none" }}
+            aria-label="Try live demo"
           >
-            Book a Call
-          </a>
+            <span style={{
+              width: "6px", height: "6px", borderRadius: "50%",
+              background: "var(--charcoal)", display: "inline-block", flexShrink: 0,
+              animation: "goldPulse 2s ease-in-out infinite",
+            }} />
+            Live Demo
+          </button>
 
-          {/* Hamburger — mobile only */}
+          <style>{`@media (min-width: 768px) { .nav-cta-btn { display: inline-flex !important; } }`}</style>
           <button
-            className={`nav-hamburger${drawerOpen ? " open" : ""}`}
-            onClick={() => setDrawerOpen((v) => !v)}
-            aria-label={drawerOpen ? "Close menu" : "Open menu"}
-            aria-expanded={drawerOpen}
-            aria-controls="nav-drawer"
+            onClick={onCallClick}
+            className="btn-primary nav-cta-btn"
+            style={{ fontSize: "9px", padding: "0.6rem 1.1rem" }}
+            aria-label="Try live demo"
           >
-            <span />
-            <span />
-            <span />
+            <span style={{
+              width: "6px", height: "6px", borderRadius: "50%",
+              background: "var(--charcoal)", display: "inline-block", flexShrink: 0,
+              animation: "goldPulse 2s ease-in-out infinite",
+            }} />
+            Live Demo
+          </button>
+
+          <button
+            className={`nav-hamburger${open ? " open" : ""}`}
+            onClick={() => setOpen((v) => !v)}
+            aria-expanded={open}
+            aria-label={open ? "Close menu" : "Open menu"}
+          >
+            <span aria-hidden="true" />
+            <span aria-hidden="true" />
+            <span aria-hidden="true" />
           </button>
         </div>
       </nav>
 
-      {/* Mobile overlay backdrop */}
-      {drawerOpen && (
-        <div
-          onClick={close}
-          style={{
-            position: "fixed", inset: 0, zIndex: 98,
-            background: "rgba(0,0,0,0.5)",
-          }}
-          aria-hidden="true"
-        />
-      )}
-
-      {/* Mobile drawer */}
-      <div
-        id="nav-drawer"
-        className={`nav-drawer${drawerOpen ? " open" : ""}`}
-        role="dialog"
-        aria-modal="true"
-        aria-label="Mobile navigation"
-      >
-        <nav style={{ display: "flex", flexDirection: "column" }}>
-          {navLinks.map(({ label, href }) => (
-            <a key={href} href={href} className="nav-drawer-link" onClick={close}>
-              {label}
-            </a>
-          ))}
-        </nav>
-
-        <div style={{
-          paddingTop: "2rem",
-          display: "flex", flexDirection: "column", gap: "0.75rem",
-          marginTop: "auto",
-        }}>
-          <button
-            className="btn-ghost"
-            onClick={() => { onCallClick(); close(); }}
-            style={{
-              width: "100%", justifyContent: "center",
-              border: "1px solid var(--border)", borderRadius: "var(--radius-sm)",
-              minHeight: "52px", fontSize: "11px",
-            }}
-          >
-            Try Live Demo
-          </button>
-          <a
-            href="mailto:hello@torqdesigns.com"
-            className="btn-primary"
-            style={{ width: "100%", justifyContent: "center", minHeight: "52px", fontSize: "11px" }}
-            onClick={close}
-          >
-            Book a Call
-          </a>
+      <div className={`nav-drawer${open ? " open" : ""}`} aria-hidden={!open}>
+        {links.map(({ label, href }) => (
+          <a key={label} href={href} className="nav-drawer-link" onClick={close}>{label}</a>
+        ))}
+        <button
+          onClick={() => { close(); onCallClick(); }}
+          className="btn-primary"
+          style={{ marginTop: "2rem", fontSize: "11px", padding: "1rem 2rem", width: "fit-content" }}
+        >
+          <span style={{
+            width: "7px", height: "7px", borderRadius: "50%",
+            background: "var(--charcoal)", display: "inline-block",
+            animation: "goldPulse 2s ease-in-out infinite",
+          }} />
+          Try Live Demo
+        </button>
+        <div style={{ marginTop: "auto", paddingTop: "2rem" }}>
+          <p style={{
+            fontFamily: "'DM Mono', monospace",
+            fontSize: "9px", color: "var(--muted-faint)",
+            letterSpacing: "0.16em", textTransform: "uppercase",
+          }}>
+            Hindi & English · 24/7
+          </p>
         </div>
-
-        <p className="mono" style={{
-          color: "var(--muted-faint)", fontSize: "8.5px",
-          textAlign: "center", marginTop: "2rem",
-          letterSpacing: "0.12em",
-        }}>
-          hello@torqdesigns.com
-        </p>
       </div>
     </>
   );

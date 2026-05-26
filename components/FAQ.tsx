@@ -44,15 +44,15 @@ export default function FAQ() {
       <hr className="hairline" style={{ marginBottom: "5rem" }} />
       <div className="two-col" style={{ flexWrap: "wrap", gap: "3rem 5rem" }}>
         <div className="two-col-label">
-          <span className="section-label">FAQ</span>
+          <span className="section-label reveal">FAQ</span>
         </div>
         <div className="two-col-content">
-          <h2 className="section-title">Common<br /><em>questions</em></h2>
-          <p className="section-body" style={{ marginBottom: "3rem" }}>
+          <h2 className="section-title reveal reveal-delay-1">Common<br /><em>questions</em></h2>
+          <p className="section-body reveal reveal-delay-2" style={{ marginBottom: "3rem" }}>
             Everything you need to know before getting started.
           </p>
 
-          <div style={{ display: "flex", flexDirection: "column" }}>
+          <div style={{ display: "flex", flexDirection: "column" }} className="reveal reveal-delay-3">
             {faqs.map((item, i) => {
               const isOpen = open === i;
               return (
@@ -66,17 +66,12 @@ export default function FAQ() {
                   <button
                     onClick={() => setOpen(isOpen ? null : i)}
                     style={{
-                      width: "100%",
-                      background: "none",
-                      border: "none",
-                      cursor: "pointer",
+                      width: "100%", background: "none", border: "none", cursor: "pointer",
                       padding: "1.5rem 0",
-                      display: "flex",
-                      alignItems: "flex-start",
-                      justifyContent: "space-between",
-                      gap: "1.5rem",
-                      textAlign: "left",
+                      display: "flex", alignItems: "flex-start", justifyContent: "space-between",
+                      gap: "1.5rem", textAlign: "left",
                     }}
+                    aria-expanded={isOpen}
                   >
                     <span style={{
                       fontFamily: "'DM Sans', sans-serif", fontWeight: 400,
@@ -85,9 +80,8 @@ export default function FAQ() {
                       {item.q}
                     </span>
                     <span style={{
-                      color: "var(--gold)", fontSize: "1rem", flexShrink: 0,
-                      marginTop: "2px",
-                      transition: "transform 0.25s ease",
+                      color: "var(--gold)", fontSize: "1rem", flexShrink: 0, marginTop: "2px",
+                      transition: "transform 0.28s var(--ease-out)",
                       display: "inline-block",
                       transform: isOpen ? "rotate(45deg)" : "rotate(0deg)",
                     }}>
@@ -97,13 +91,13 @@ export default function FAQ() {
 
                   <div style={{
                     overflow: "hidden",
-                    maxHeight: isOpen ? "300px" : "0",
-                    transition: "max-height 0.35s ease",
+                    maxHeight: isOpen ? "400px" : "0",
+                    transition: "max-height 0.4s var(--ease-out)",
                   }}>
                     <p style={{
                       fontFamily: "'DM Sans', sans-serif", fontWeight: 300,
                       fontSize: "0.9rem", color: "var(--muted-light)",
-                      lineHeight: 1.75, paddingBottom: "1.75rem",
+                      lineHeight: 1.8, paddingBottom: "1.75rem",
                       maxWidth: "52ch",
                     }}>
                       {item.a}
